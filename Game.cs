@@ -9,86 +9,109 @@ namespace Hangman_v2._0
     class HangmanGame
     {
         public string WordToGuess { get; set; }
-        
+
         public string GuessedLetter { get; set; }
 
-        public string[] WildcardsAndGuessedLetters { get; set; }
+        private int countAllAttempts;
 
-        public int CountAttempts { get; set; }
-
-        /// <summary>
-        /// Fills the Array with Wildcards "_ "
-        /// </summary>
-        public void FillArrayWithWildcards()
+        public int CountAllAttempts
         {
-            //Hier ist ein Fehler, wegen fehlender Array Initialisierung
-            for (int i = 0; i < WildcardsAndGuessedLetters.Length; i++)
-            {
-                WildcardsAndGuessedLetters[i] = "_ ";
-            }
-        } 
-        /// <summary>
-        /// Writes Correct Letters in the Wildcard-Array
-        /// </summary>
-        public void WriteCorrectLetterInArray()
-        {
-            string letter = this.GuessedLetter;
-            int position = IsLetterInWordChecker();
-            if (position != -1) {
-            WildcardsAndGuessedLetters[position] = letter;
-            }
+            get { return countAllAttempts; }
         }
-        /// <summary>
-        /// Checks if the Letter is in the Word
-        /// </summary>
-        /// <returns>Postion of the Letter in the Word</returns>
-        public int IsLetterInWordChecker()
+
+        private int countWrongAttempts;
+
+        public int CountWrongAttempts
         {
-            string word = this.WordToGuess;
-            string letter = this.GuessedLetter;
-            CountAttempts++;
+            get { return countWrongAttempts; }
+        }
+
+        private char[] WrongLetters { get; set; }
+
+        private char[] OutputArray { get; set; }
+
+
+        private char[] WordToArray()
+        {
+            char[] wordInArray = this.WordToGuess.ToCharArray();
+            return wordInArray;
+        }
+        
+        public bool IsLetterInWordChecker()
+        {
+            char[] word = this.WordToArray();
+            char letter = Convert.ToChar(this.GuessedLetter);
+
             for (int i = 0; i < word.Length; i++)
             {
-                if (word[i] == letter[0])
+                if (letter == word[i])
                 {
-                    return i;
+                    this.CorrectLetterToArray(i);
+                    return true;
                 }
             }
-            return -1;
+            WrongLetterToArray(letter);
+            IncreaseWrongAttemptsCounter();
+            return false;
         }
 
-        public string WriteWildcardsAndGuessedLetters()
-        {
-            foreach (string value in this.WildcardsAndGuessedLetters){
-                Console.Write(value);
-            }
-            return "";
+        private void IncreaseWrongAttemptsCounter(){
+            this.countWrongAttempts++;
+            HangmanDrawer();
         }
 
-        /// <summary>
-        /// Draws the Hangman
-        /// </summary>
-        public void DrawHangman()
+        public void IncreaseAttemptsCounter()
         {
-            int counter = CountAttempts;
-            switch (counter)
+            this.countAllAttempts++;
+        }
+
+        private void HangmanDrawer()
+        {
+            //TODO: Implement Hangman-"Drawing"
+            switch (this.countWrongAttempts)
             {
                 case 1:
-                    Console.WriteLine("Strich 1");
+                    Console.WriteLine("Stufe 1");
                     break;
                 case 2:
-                    Console.WriteLine("Strich 2");
-                    break;
-                case 3:
-                    Console.WriteLine("Strich 3");
-                    break;
-                case 4:
-                    Console.WriteLine("Du hast leider zu viele Versuche gebraucht! Game over!");
+                    Console.WriteLine("Stufe 2");
                     break;
                 default:
-                    Console.WriteLine("Fehler");
+                    Console.WriteLine("Error");
                     break;
             }
+
+
+        }
+
+        public void WrongLetterToArray(char letter)
+        {
+            int attempt = this.countAllAttempts;
+            this.WrongLetters[attempt] = letter;
+
+        }
+
+        public void WildcardsToArray()
+        {
+            for (int i = 0; i < this.WordToGuess.Length; i++)
+            {
+                this.OutputArray[i] = '_';
+            }
+            this.WriteOutputArray();
+        }
+
+        public void WriteOutputArray()
+        {
+            foreach (char item in this.OutputArray)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public void CorrectLetterToArray(int positionInArray)
+        {
+            this.OutputArray[positionInArray] = Convert.ToChar(this.GuessedLetter);
+            this.WriteOutputArray();
         }
     }
 }
