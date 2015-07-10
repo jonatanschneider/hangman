@@ -81,14 +81,14 @@ namespace Hangman_v2._0
                     break;
             }
 
-
+            UserInput();
         }
 
         public void WrongLetterToArray(char letter)
         {
+            this.WrongLetters = new char[WordToGuess.Length];
             int attempt = this.countAllAttempts;
             this.WrongLetters[attempt] = letter;
-
         }
 
         public void WildcardsToArray()
@@ -110,8 +110,18 @@ namespace Hangman_v2._0
 
         public void CorrectLetterToArray(int positionInArray)
         {
+            this.OutputArray = new char[WordToGuess.Length];
             this.OutputArray[positionInArray] = Convert.ToChar(this.GuessedLetter);
             this.WriteOutputArray();
+            this.UserInput();
+        }
+
+        public void UserInput()
+        {
+            Console.WriteLine("Geben Sie einen Buchstaben ein");
+            this.GuessedLetter = Console.ReadLine().ToUpper();
+            this.IncreaseAttemptsCounter();
+            this.IsLetterInWordChecker();
         }
     }
 }

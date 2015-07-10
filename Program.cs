@@ -18,9 +18,9 @@ namespace Hangman_v2._0
             HangmanGame game = new HangmanGame();
 
             Console.WriteLine("Geben Sie das zu suchende Wort ein");
-            game.WordToGuess = Console.ReadLine();
+            game.WordToGuess = Console.ReadLine().ToUpper();
             Console.WriteLine("Geben Sie einen Buchstaben ein");
-            game.GuessedLetter = Console.ReadLine();
+            game.GuessedLetter = Console.ReadLine().ToUpper();
             game.IncreaseAttemptsCounter();
             game.IsLetterInWordChecker();
         
