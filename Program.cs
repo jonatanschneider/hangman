@@ -19,12 +19,11 @@ namespace Hangman_v2._0
 
             Console.WriteLine("Geben Sie das zu suchende Wort ein");
             game.WordToGuess = Console.ReadLine().ToUpper();
-            Console.WriteLine("Geben Sie einen Buchstaben ein");
-            game.GuessedLetter = Console.ReadLine().ToUpper();
-            game.IncreaseAttemptsCounter();
-            game.IsLetterInWordChecker();
-        
-            Console.ReadLine();
+            game.OutputLetter = new char[game.WordToGuess.Length];
+            game.WriteOutput();
+            Console.WriteLine();
+
+            game.UserInput();
             return game;
 
         }
