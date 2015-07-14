@@ -9,86 +9,152 @@ namespace Hangman_v2._0
     class HangmanGame
     {
         public string WordToGuess { get; set; }
-        
+
         public string GuessedLetter { get; set; }
 
-        public string[] WildcardsAndGuessedLetters { get; set; }
+        private int countAllAttempts;
 
-        public int CountAttempts { get; set; }
-
-        /// <summary>
-        /// Fills the Array with Wildcards "_ "
-        /// </summary>
-        public void FillArrayWithWildcards()
+        public int CountAllAttempts
         {
-            //Hier ist ein Fehler, wegen fehlender Array Initialisierung
-            for (int i = 0; i < WildcardsAndGuessedLetters.Length; i++)
-            {
-                WildcardsAndGuessedLetters[i] = "_ ";
-            }
-        } 
-        /// <summary>
-        /// Writes Correct Letters in the Wildcard-Array
-        /// </summary>
-        public void WriteCorrectLetterInArray()
-        {
-            string letter = this.GuessedLetter;
-            int position = IsLetterInWordChecker();
-            if (position != -1) {
-            WildcardsAndGuessedLetters[position] = letter;
-            }
+            get { return countAllAttempts; }
         }
-        /// <summary>
-        /// Checks if the Letter is in the Word
-        /// </summary>
-        /// <returns>Postion of the Letter in the Word</returns>
-        public int IsLetterInWordChecker()
+
+        private int countWrongAttempts;
+
+        public int CountWrongAttempts
         {
-            string word = this.WordToGuess;
-            string letter = this.GuessedLetter;
-            CountAttempts++;
+            get { return countWrongAttempts; }
+        }
+
+        public char[] OutputLetter { get; set; }
+
+        private char[] WrongLetters { get; set; }
+
+        /// <summary>
+        /// Used for choice of the right case in HangmanDrawer
+        /// </summary>
+        private void IncreaseWrongAttemptsCounter()
+        {
+            this.countWrongAttempts++;
+            HangmanDrawer();
+        }
+
+        /// <summary>
+        /// Counts every attempt of the user
+        /// </summary>
+        public void IncreaseAttemptsCounter()
+        {
+            this.countAllAttempts++;
+        }
+
+        /// <summary>
+        /// Returns the to guessing word in char Array
+        /// </summary>
+        /// <returns>Guessed Word in char Array</returns>
+        private char[] WordToArray()
+        {
+            char[] wordInArray = this.WordToGuess.ToCharArray();
+            return wordInArray;
+        }
+
+        private void LetterIsNotInWord(char letter)
+        {
+            WrongLetterToArray(letter);
+            IncreaseWrongAttemptsCounter();
+        }
+
+        public void IsLetterInWordChecker()
+        {
+            char[] word = this.WordToArray();
+            char letter = Convert.ToChar(this.GuessedLetter);
+            bool letterInWord = false;
+
             for (int i = 0; i < word.Length; i++)
             {
-                if (word[i] == letter[0])
+                if (letter == word[i])
                 {
-                    return i;
+                    this.OutputLetter[i] = Convert.ToChar(this.GuessedLetter);
+                    letterInWord = true;
                 }
             }
-            return -1;
+            this.WriteOutput();
+
+            if (letterInWord == false)
+            {
+                this.LetterIsNotInWord(letter);
+            }
+
+            this.UserInput();
         }
 
-        public string WriteWildcardsAndGuessedLetters()
+        private void HangmanDrawer()
         {
-            foreach (string value in this.WildcardsAndGuessedLetters){
-                Console.Write(value);
+            switch (this.countWrongAttempts)
+            {
+                case 1:
+                    Console.WriteLine("Stufe 1");
+                    break;
+                case 2:
+                    Console.WriteLine("Stufe 2");
+                    break;
+                case 3:
+                    Console.WriteLine("Stufe 3");
+                    break;
+                case 4:
+                    Console.WriteLine("Stufe 4");
+                    break;
+                case 5:
+                    Console.WriteLine("Game Over!");
+                    Console.WriteLine("Zum Beenden beliebige Taste drücken");
+                    Console.ReadLine();
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Error");
+                    break;
             }
-            return "";
         }
 
         /// <summary>
-        /// Draws the Hangman
+        /// Writes a wrong letter in an Array
         /// </summary>
-        public void DrawHangman()
+        /// <param name="letter">The guessed letter</param>
+        public void WrongLetterToArray(char letter)
         {
-            int counter = CountAttempts;
-            switch (counter)
-            {
-                case 1:
-                    Console.WriteLine("Strich 1");
-                    break;
-                case 2:
-                    Console.WriteLine("Strich 2");
-                    break;
-                case 3:
-                    Console.WriteLine("Strich 3");
-                    break;
-                case 4:
-                    Console.WriteLine("Du hast leider zu viele Versuche gebraucht! Game over!");
-                    break;
-                default:
-                    Console.WriteLine("Fehler");
-                    break;
-            }
+            this.WrongLetters = new char[6];
+            int attempt = this.countAllAttempts;
+            this.WrongLetters[attempt] = letter;
+        }
+
+       public void WriteOutput()
+       {
+           for (int i = 0; i < this.WordToGuess.Length; i++)
+           {
+               if (this.OutputLetter[i] != '\0')
+               {
+                   Console.Write(this.OutputLetter[i]);
+                   Console.Write(" ");
+               }
+               else if (this.OutputLetter[i] == '\0')
+               {
+                   Console.Write('_');
+                   Console.Write(" ");
+               }
+           }
+           Console.WriteLine();
+       }
+
+        /// <summary>
+        /// The input the user has to make before working the code off
+        /// </summary>
+        public void UserInput()
+        {
+            Console.WriteLine("Geben Sie einen Buchstaben ein");
+            this.GuessedLetter = Console.ReadLine().ToUpper();
+            Console.WriteLine();
+            this.IncreaseAttemptsCounter();
+            this.IsLetterInWordChecker();
+
         }
     }
 }
