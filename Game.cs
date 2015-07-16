@@ -28,7 +28,7 @@ namespace Hangman_v2._0
 
         public char[] OutputLetter { get; set; }
 
-        private char[] WrongLetters { get; set; }
+        public char[] WrongLetters { get; set; }
 
         /// <summary>
         /// Used for choice of the right case in HangmanDrawer
@@ -84,7 +84,7 @@ namespace Hangman_v2._0
                 this.LetterIsNotInWord(letter);
             }
 
-            this.UserInput();
+            this.UserInputWithWrongLetters();
         }
 
         private void HangmanDrawer()
@@ -92,22 +92,152 @@ namespace Hangman_v2._0
             switch (this.countWrongAttempts)
             {
                 case 1:
-                    Console.WriteLine("Stufe 1");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
                     break;
                 case 2:
-                    Console.WriteLine("Stufe 2");
+                    Console.WriteLine("");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
                     break;
                 case 3:
-                    Console.WriteLine("Stufe 3");
+                    Console.WriteLine("");
+                    Console.WriteLine("      | /         ");
+                    Console.WriteLine("      |/");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
                     break;
                 case 4:
-                    Console.WriteLine("Stufe 4");
+                      Console.WriteLine("      ______________");
+                    Console.WriteLine("      | /         ");
+                    Console.WriteLine("      |/");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
                     break;
                 case 5:
+                      Console.WriteLine("      ______________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
+                    break;
+                case 6:
+                      Console.WriteLine("      ______________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/         ( )");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
+                    break;
+                case 7:
+                      Console.WriteLine("      ______________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/         ( )");
+                    Console.WriteLine("      |           |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
+                    break;
+                case 8:
+                      Console.WriteLine("      ______________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/         ( )");
+                    Console.WriteLine("      |         \\ |");
+                    Console.WriteLine("      |          \\|");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
+                    break;
+                case 9:
+                    Console.WriteLine("        ____________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/         ( )");
+                    Console.WriteLine("      |         \\ | /");
+                    Console.WriteLine("      |          \\|/");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
+                    break;
+                case 10:
+                    Console.WriteLine("        ____________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/         ( )");
+                    Console.WriteLine("      |         \\ | /");
+                    Console.WriteLine("      |          \\|/");
+                    Console.WriteLine("      |           |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine("      |");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
+                    break;
+                case 11:
+                    Console.WriteLine("        ____________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/         ( )");
+                    Console.WriteLine("      |         \\ | /");
+                    Console.WriteLine("      |          \\|/");
+                    Console.WriteLine("      |           |");
+                    Console.WriteLine("      |          /");
+                    Console.WriteLine("      |         /");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
+                    break;
+                case 12:
+                    Console.WriteLine("        ____________");
+                    Console.WriteLine("      | /         |");
+                    Console.WriteLine("      |/         ( )");
+                    Console.WriteLine("      |         \\ | /");
+                    Console.WriteLine("      |          \\|/");
+                    Console.WriteLine("      |           |");
+                    Console.WriteLine("      |          / \\");
+                    Console.WriteLine("      |         /   \\");
+                    Console.WriteLine(" ___________");
+                    Console.WriteLine("|           |");
                     Console.WriteLine("Game Over!");
-                    Console.WriteLine("Zum Beenden beliebige Taste drücken");
+                    Console.WriteLine("Beliebige Taste zum Beenden drücken.");
                     Console.ReadLine();
-                    Environment.Exit(0);
+                    Environment.Exit(1);
                     break;
                 default:
                     Console.WriteLine("Error");
@@ -121,8 +251,7 @@ namespace Hangman_v2._0
         /// <param name="letter">The guessed letter</param>
         public void WrongLetterToArray(char letter)
         {
-            this.WrongLetters = new char[6];
-            int attempt = this.countAllAttempts;
+            int attempt = this.CountWrongAttempts;
             this.WrongLetters[attempt] = letter;
         }
 
@@ -144,17 +273,50 @@ namespace Hangman_v2._0
            Console.WriteLine();
        }
 
+       public bool IsWordCompletlyGuessed()
+       {
+           string guess = new string(this.OutputLetter);
+
+           if (guess.Equals(this.WordToGuess))
+           {
+               return true;
+           }
+
+           return false;
+       }
+
         /// <summary>
         /// The input the user has to make before working the code off
         /// </summary>
         public void UserInput()
         {
-            Console.WriteLine("Geben Sie einen Buchstaben ein");
-            this.GuessedLetter = Console.ReadLine().ToUpper();
-            Console.WriteLine();
-            this.IncreaseAttemptsCounter();
-            this.IsLetterInWordChecker();
+                Console.WriteLine("Geben Sie einen Buchstaben ein");
+                this.GuessedLetter = Console.ReadLine().ToUpper();
+                Console.WriteLine();
+                this.IncreaseAttemptsCounter();
+                this.IsLetterInWordChecker();
+        }
 
+        public void UserInputWithWrongLetters()
+        {
+            if (IsWordCompletlyGuessed())
+            {
+                Console.WriteLine("Glückwunsch Sie haben das Wort eraten!");
+                Console.WriteLine("Zum Beenden beliebige Taste drücken.");
+                Console.ReadLine();
+                Environment.Exit(1);
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("Bisher Falsch geratene Buchstaben = ");
+                Console.WriteLine(this.WrongLetters);
+                Console.WriteLine("Geben Sie einen Buchstaben ein");
+                this.GuessedLetter = Console.ReadLine().ToUpper();
+                Console.WriteLine();
+                this.IncreaseAttemptsCounter();
+                this.IsLetterInWordChecker();
+            }
         }
     }
 }

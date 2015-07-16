@@ -16,10 +16,10 @@ namespace Hangman_v2._0
         private static HangmanGame CreateNewGame()
         {
             HangmanGame game = new HangmanGame();
-
             Console.WriteLine("Geben Sie das zu suchende Wort ein");
             game.WordToGuess = Console.ReadLine().ToUpper();
             game.OutputLetter = new char[game.WordToGuess.Length];
+            game.WrongLetters = new char[13];
             game.WriteOutput();
             Console.WriteLine();
 
