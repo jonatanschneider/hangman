@@ -7,3 +7,6 @@ D:\Users\Jonatan\Documents\Visual Studio 2013\Projects\Hangman_v2.0\obj\Debug\Ha
 D:\Users\Jonatan\Documents\Visual Studio 2015\Projects\Hangman_v2.0\bin\Debug\Hangman_v2.0.exe.config
 D:\Users\Jonatan\Documents\Visual Studio 2015\Projects\Hangman_v2.0\obj\Debug\Hangman_v2.0.exe
 D:\Users\Jonatan\Documents\Visual Studio 2015\Projects\Hangman_v2.0\obj\Debug\Hangman_v2.0.pdb
+D:\Users\Jonatan\Documents\Visual Studio 2015\Projects\Hangman_v2.0\bin\Debug\Hangman_v2.0.exe
+D:\Users\Jonatan\Documents\Visual Studio 2015\Projects\Hangman_v2.0\bin\Debug\Hangman_v2.0.pdb
+D:\Users\Jonatan\Documents\Visual Studio 2015\Projects\Hangman_v2.0\obj\Debug\Hangman_v2.0.csprojResolveAssemblyReference.cache

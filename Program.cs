@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hangman_v2._0
 {
@@ -20,6 +16,7 @@ namespace Hangman_v2._0
             game.WordToGuess = Console.ReadLine().ToUpper();
             game.OutputLetter = new char[game.WordToGuess.Length];
             game.WrongLetters = new char[13];
+            Console.Clear();
             game.WriteOutput();
             Console.WriteLine();
 
